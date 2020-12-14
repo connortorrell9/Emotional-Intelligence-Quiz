@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Emotional Intelligence Quiz</string>
+    <string name="always_applies">Always Applies</string>
+    <string name="usually_applies">Usually Applies</string>
+    <string name="somewhat_applies">Somewhat Applies</string>
+    <string name="rarely_applies">Rarely Applies</string>
+    <string name="never_applies">Never Applies</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
 </resources>
