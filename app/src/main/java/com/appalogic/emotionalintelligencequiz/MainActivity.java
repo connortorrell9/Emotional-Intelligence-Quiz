@@ -2,12 +2,16 @@ package com.appalogic.emotionalintelligencequiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String[] statements = {
+    private final String[] statements = {
             "I realize immediately when I lose my temper",
             "I can 'reframe' bad situations quickly",
             "I am able to always motive myself to do difficult tasks",
@@ -60,14 +64,73 @@ public class MainActivity extends AppCompatActivity {
             "I generally build solid relationships with those I work with",
     };
 
-    int current_statement = 0;
+    private SharedPreferences shared_preferences;
+    private int current_statement = 0;
+    private View selected_button;
+
+    private TextView statement;
+    private Button always_applies;
+    private Button usually_applies;
+    private Button somewhat_applies;
+    private Button rarely_applies;
+    private Button never_applies;
+    private Button back;
+    private Button next;
+
+    private void set_statement(){
+        statement.setText(statements[current_statement]);
+    }
+
+    private void reset_buttons(){
+        always_applies.setEnabled(true);
+        usually_applies.setEnabled(true);
+        somewhat_applies.setEnabled(true);
+        rarely_applies.setEnabled(true);
+        never_applies.setEnabled(true);
+        next.setEnabled(false);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView statement = findViewById(R.id.statement);
-        statement.setText(statements[current_statement]);
+        shared_preferences = this.getSharedPreferences("com.appalogic.emotionalintelligencequiz", Context.MODE_PRIVATE);
+
+        statement = findViewById(R.id.statement);
+        always_applies = findViewById(R.id.always_applies);
+        usually_applies = findViewById(R.id.usually_applies);
+        somewhat_applies = findViewById(R.id.somewhat_applies);
+        rarely_applies = findViewById(R.id.rarely_applies);
+        never_applies = findViewById(R.id.never_applies);
+        back = findViewById(R.id.back);
+        next = findViewById(R.id.next);
+
+        always_applies.setOnClickListener(this);
+        usually_applies.setOnClickListener(this);
+        somewhat_applies.setOnClickListener(this);
+        rarely_applies.setOnClickListener(this);
+        never_applies.setOnClickListener(this);
+        back.setOnClickListener(this);
+        next.setOnClickListener(this);
+
+        set_statement();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == next){
+            shared_preferences.edit().putInt("answer" + current_statement, Integer.parseInt(selected_button.getTag().toString())).apply();
+            reset_buttons();
+            current_statement++;
+            set_statement();
+        } else if (view == back){
+
+        } else{
+            reset_buttons();
+            view.setEnabled(false);
+            next.setEnabled(true);
+            selected_button = view;
+        }
     }
 }
