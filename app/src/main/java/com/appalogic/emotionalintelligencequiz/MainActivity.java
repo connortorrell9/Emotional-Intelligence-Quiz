@@ -124,8 +124,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             reset_buttons();
             current_statement++;
             set_statement();
+            back.setEnabled(true);
         } else if (view == back){
-
+            reset_buttons();
+            current_statement--;
+            set_statement();
+            if(current_statement == 0){
+                back.setEnabled(false);
+            }
         } else{
             reset_buttons();
             view.setEnabled(false);
