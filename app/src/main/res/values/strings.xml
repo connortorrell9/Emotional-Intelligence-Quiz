@@ -7,4 +7,6 @@
     <string name="never_applies">Never Applies</string>
     <string name="back">Back</string>
     <string name="next">Next</string>
+    <string name="overall_score">Overall Score:</string>
+    <string name="score_string">%d / 100</string>
 </resources>

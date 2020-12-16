@@ -3,6 +3,7 @@ package com.appalogic.emotionalintelligencequiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String[] statements = {
+    static final String[] statements = {
             "I realize immediately when I lose my temper",
             "I can 'reframe' bad situations quickly",
             "I am able to always motive myself to do difficult tasks",
@@ -122,9 +123,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view == next){
             shared_preferences.edit().putInt("answer" + current_statement, Integer.parseInt(selected_button.getTag().toString())).apply();
             reset_buttons();
-            current_statement++;
-            set_statement();
             back.setEnabled(true);
+            if ((current_statement + 1) == statements.length){
+                Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                startActivity(intent);
+            } else{
+                current_statement++;
+                set_statement();
+            }
         } else if (view == back){
             reset_buttons();
             current_statement--;
