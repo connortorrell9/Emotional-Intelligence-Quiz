@@ -9,4 +9,9 @@
     <string name="next">Next</string>
     <string name="overall_score">Overall Score:</string>
     <string name="score_string">%d / 100</string>
+    <string name="self_awareness">Self Awareness</string>
+    <string name="managing_emotions">Managing Emotions</string>
+    <string name="motivating_oneself">Motivating Oneself</string>
+    <string name="empathy">Empathy</string>
+    <string name="social_skill">Social Skill</string>
 </resources>
